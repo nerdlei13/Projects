@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="{% static 'css/adminStyles.css' %}">
+	<script type="text/javascript"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<title>Crawl Demo</title>
+	<label class="switch">
+		<input type="checkbox">
+		<span class="slider round"></span>
+	  </label>
+</head>
+
+
+<body>
+	<div class="nav-btn">Crawl Option</div>
+	<div class="container">
+
+		<div class="sidebar">
+			<nav>
+				<a href="#"><span>Crawl Demo</span></a>
+				{% if user.is_authenticated%}
+					<h4 style="color: white; text-align: center">Welcome {{request.user.username}}</h4>
+				{% endif %}
+				<ul>
+					<!--<li class="active"><a href="#"></a>Download Search</li> needs functionality-->
+					<li class="active"><a href="{% url 'index' %}">Home</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+
+	<div class="main-content">
+		<div class="card-padding" style="height: 100%;">
+			<div class="panel-wrapper" style="height: 100%;">
+				<div class="panel-head">
+					<button id="crawlButton" class="button">Search</button>
+				</div>
+				<div class="panel-body" style="height: 100%;">
+					<form id="search_form">
+						<label for="allwords">Subreddit to Search</label>
+						<input type="text" id="subreddit" name="subreddit" size="30">
+						<br>
+						<label for="allwords">Keywords</label>
+						<input type="text" id="allwords" name="allwords" size="30">
+						<br>
+					</form>
+					<div class="resultlabel">
+						<br><h2>Results</h2>
+						<!-- <div class="searchbuttons">
+							<button class="button">Clear</button>
+						</div> -->
+					</div>
+					<div class="rectangle" id="crawlOutput" style="color: black; overflow: auto; height: 90%;"></div>
+				</div>
+			</div>
+			<script>
+				$('#search_form').keypress(function (e) {
+					var key = e.which;
+					if(key == 13) {
+						$('#crawlButton').click();
+						return false;
+					}
+				});
+				$("#crawlButton").click(function () {
+					var search_word = $("#allwords").val();
+					var subreddit = $("#subreddit").val();
+					$.ajax({
+						type: "POST",
+						url: '/demo_output/',
+						data: { "search_word": search_word , "subreddit": subreddit },
+						success: function (result) {
+							console.log(result)
+							$("#crawlOutput").html(result["output"]);
+						}
+					});
+				});
+			</script>
+
+</body>
+</html>

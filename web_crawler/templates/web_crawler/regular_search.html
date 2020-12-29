@@ -1,0 +1,235 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="{% static 'css/master.css' %}">
+	<script type="text/javascript"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<title>Search Console</title>
+	<label class="switch">
+		<input type="checkbox">
+		<span class="slider round"></span>
+	  </label>
+</head>
+
+
+<body>
+	<div class="table-space"> 
+		<!-- style="width: 70%" add this in for datatable -->
+		<table style="width:90%" id="search_history" >
+			<thead>
+				<tr>
+					<th style="display:none;">id</th>
+					<th>Subreddit</th>
+					<th>Search Phrase</th>
+					<th>Timestamp</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for each in data %}
+					<tr>
+						<td id="search_id_table" style="display:none;">{{each.id}}</td>
+						<td id="subreddit_table">{{each.subreddit}}</td>
+						<td id="search_word">{{each.keyword}}</td>
+						<td>{{each.timestamp}}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<div class="nav-btn">Admin Options</div>
+	<div class="container">
+
+		<div class="sidebar">
+			<nav>
+				<a href="#"><span>Search Console</span></a>
+				{% if user.is_authenticated%}
+					<h4 style="color: white; text-align: center">Welcome {{request.user.username}}</h4>
+				{% endif %}
+				<ul>
+					<!--<li class="active"><a href="#"></a>Download Search</li> needs functionality-->
+					<li class="active"><a href="{% url 'index' %}">Home</a></li>
+					<li class="active"><a href="{% url 'advanced_search' %}">Advanced Search</a></li>
+					<li class="active"><a href="{% url 'search_subscription' %}">Search Subscription</a></li>
+					{% if user.is_superuser%}
+					<li class ="active"><a href ="{% url 'show_users' %}">Active Users</a></li>
+                    <li class ="active"><a href ="{% url 'top5users' %}">Top 5 Users</a></li>
+                    <li class ="active"><a href ="{% url 'top5keywords' %}">Top 5 Key Words</a></li>
+					{% endif %}
+					{% if user.is_authenticated%}
+					<!-- <li class="active"><a href="#"></a>SQL Database</li> -->
+					<li class="active"><a href="{% url 'logout' %}">Logout</a></li>
+					{% endif %}
+				</ul>
+			</nav>
+		</div>
+	</div>
+
+	<div class="main-content">
+		<div class="card-padding" style="height: 100%;">
+			<div class="panel-wrapper" style="height: 100%;">
+				<div class="panel-head">
+					<button id="crawlButton" class="button">Search</button>
+				</div>
+				<div class="panel-body" style="height: 100%;">
+					<form id="search_form">
+						<label for="subreddit">Subreddit to Search</label>
+						<input type="text" id="subreddit" name="subreddit" size="30">
+						<br>
+						<label for="allwords">Keywords</label>
+						<input type="text" id="allwords" name="allwords" size="30">
+						<br>
+						<br>
+						<b><label>Want to subscribe to this search?</label></b>
+						<br>
+						<label for="email">Email</label>
+						<input type="text" id="email" name="email" size="30">
+						<br>
+						<label for="subscribed_frequency">Email me if there are new search results in</label>
+						<select name="subscribed_frequency" id="subscribed_frequency">
+							<option>10 minutes</option>
+							<option>1 hour</option>
+							<option>1 day</option>
+							<option>1 week</option>
+							<option>1 month</option>
+						</select>						
+						<br>
+						<input type="hidden" id="search_id" name="search_id" value="{{ search_id }}">
+						<button id="subscribe_button" class="button" type="button">Subscribe</button>
+					</form>
+					<div class="resultlabel">
+						<br><h2>Results</h2>
+						<!-- <div class="searchbuttons">
+							<button class="button">Clear</button>
+						</div> -->
+					</div>
+					<div class="rectangle" id="crawlOutput" style="color: black; overflow: auto; height: 80%; "></div>
+				</div>
+			</div>
+			<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+			<script 
+				type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js">
+			</script>
+			<script>
+				// $(document).ready(function(){
+				// 	var searchTable = $("#search_history").DataTable({
+				// 		"autoWidth": false,
+				// 		"scrollX" : false,
+				// 		"paging": true
+				// 	});
+				// 	$('#search_form').keypress(function (e) {
+				// 		var key = e.which;
+				// 		if(key == 13) {
+				// 			$('#crawlButton').click();
+				// 			return false;
+				// 		}
+				// 	});
+				// 	$("#crawlButton").click(function () {
+				// 	var search_word = $("#allwords").val();
+				// 	var subreddit = $("#subreddit").val();
+				// 		$.ajax({
+				// 			type: "POST",
+				// 			url: '/regular_output/',
+				// 			data: { "search_word": search_word , "subreddit": subreddit },
+				// 			success: function (result) {
+				// 				$("#crawlOutput").html(result);
+				// 				$.ajax({
+				// 					type: "GET",
+				// 					url: '/show_history/',
+				// 					success: function (result) {
+				// 						var new_search = result[0];
+				// 						$("#search_history").prepend('<tr><td id="subreddit_table">' + new_search.subreddit + '</td><td id="search_word">' + new_search.keyword + "</td><td>" + new_search.timestamp + "</td></tr>");
+				// 					}	
+				// 				});
+				// 			}
+				// 		});
+				// 	});
+				// 	$("#search_history tbody").on("click", "tr", function () {
+				// 		var rowData = {}
+				// 		var subreddit = $(this).find('#subreddit_table').text()
+				// 		var search_word = $(this).find('#search_word').text()
+				// 		rowData["search_word"] = search_word
+				// 		rowData["subreddit"] = subreddit
+				// 		console.log(rowData);
+				// 		$("#subreddit").val(subreddit);
+				// 		$("#allwords").val(search_word);
+				// 		$.ajax({
+				// 			type: "POST",
+				// 			url: '/regular_output/',
+				// 			data: rowData,
+				// 			success: function (result) {
+				// 				$("#crawlOutput").html(result);
+				// 			}
+				// 		});
+				// 	});
+				// });
+				$('#search_form').keypress(function (e) {
+					var key = e.which;
+					if(key == 13) {
+						$('#crawlButton').click();
+						return false;
+					}
+				});
+				$("#crawlButton").click(function () {
+					var search_word = $("#allwords").val();
+					var subreddit = $("#subreddit").val();
+					$.ajax({
+						type: "POST",
+						url: '/regular_output/',
+						data: { "search_word": search_word , "subreddit": subreddit },
+						success: function (result) {
+							$("#crawlOutput").html(result["output"]);
+							$("#search_id").val(result["search_id"]);
+							$.ajax({
+								type: "GET",
+								url: '/show_history/',
+								success: function (result) {
+									var new_search = result[0];
+									$("#search_history").prepend('<tr><td id="subreddit_table">' + new_search.subreddit + '</td><td id="search_word">' + new_search.keyword + "</td><td>" + new_search.timestamp + "</td></tr>");
+								}	
+							});
+						}
+					});
+				});
+
+				$("#search_history tbody").on("click", "tr", function () {
+					var rowData = {}
+					var subreddit = $(this).find('#subreddit_table').text()
+					var search_word = $(this).find('#search_word').text()
+					var search_id = $(this).find('#search_id_table').text()
+					rowData["search_word"] = search_word
+					rowData["subreddit"] = subreddit
+				    console.log(rowData);
+				    $("#subreddit").val(subreddit);
+				    $("#allwords").val(search_word);
+				    $("#search_id").val(search_id);
+				    $.ajax({
+						type: "POST",
+						url: '/regular_output/',
+						data: rowData,
+						success: function (result) {
+							$("#crawlOutput").html(result["output"]);
+						}
+					});
+				});
+
+				$("#subscribe_button").click(function () {
+					var email = $("#email").val();
+					var subscribed_frequency = $("#subscribed_frequency").val();
+					var search_id = $("#search_id").val();
+					console.log(search_id);
+					$.ajax({
+						type: "POST",
+						url: '/search_subscribe/',
+						data: { "search_id": search_id, "email": email , "subscribed_frequency": subscribed_frequency },
+						success: function (result) {
+							console.log("subscribed");
+							alert("Thank you for subscribing. We'll email you if there are new search results.");
+						}
+					});
+				});
+			</script>
+
+</body>
+</html>

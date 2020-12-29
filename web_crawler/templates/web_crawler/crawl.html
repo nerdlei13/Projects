@@ -1,0 +1,18 @@
+<input id="search" name="search" type="text" class="query-search" placeholder="Search...">
+<button id="crawlButton" type="button">Crawl</button>
+<div id="crawlOutput"></div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    $("#crawlButton").click(function() {
+    	var search_word = $("#search").val();
+    	$.ajax({
+			type: "POST",
+			url: '/output/',
+			data: {"search_word": search_word},
+			success: function(result){
+				$("#crawlOutput").html(result);
+			}
+	    });
+	    
+	});
+</script>

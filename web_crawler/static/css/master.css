@@ -1,0 +1,16 @@
+/*creating a master.css file to import all styles in any 
+    html file
+*/
+
+@import url(adminStyles.css);
+@import url(button.css);
+@import url(change.css);
+@import url(darkmode.css);
+@import url(default_style.css);
+@import url(found.css);
+@import url(nav.css);
+@import url(registration.css);
+@import url(regular_style.css);
+@import url(retrieve.css);
+@import url(styles.css);
+@import url(success.css);

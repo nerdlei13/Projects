@@ -1,0 +1,67 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block content %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<div>
+    <h1 class="toggle-btn">Create Your Account</h1>
+</div>
+
+<form id="register" class="input-group" method="POST">
+    <!--eslint-disable-next-line no-use-before-define-->
+    {%csrf_token %}
+    <input type="text" name="username" class="input-field" placeholder="Username" id="username">
+    <input type="text" name="email" class="input-field" placeholder="Email Address" id="email">
+    <input type="password" name="password1" class="input-field" id="newPass" placeholder="Enter Password"
+        onkeyup="checkPasswordMatch()">
+    <input type="password" name="password2" class="input-field" id="confirmPass" placeholder="Confirm Password"
+        onkeyup="checkPasswordMatch()">
+    <div class="message">
+        <div id="password_match1"></div>
+        <div id="password_match2"></div>
+        <div id="check_email"></div>
+        <div id="check_username"></div>
+    </div>
+
+    <div class="policy">
+        <!-- <input type="checkbox" class="check-box" id="check-me" onclick="checkMe()" />
+        <label id="label">I agree with the terms & condition.</label> -->
+    </div>
+
+    <button type="submit" class="submit-btn" id="reg-btn">Register</button>
+    <script src="{% static 'javascript/matching.js' %}"></script>
+</form>
+<script>
+    $("#username").change(function () {
+        var username = $("#username").val();
+        $.ajax({
+            type: "POST",
+            url: '/check_username/',
+            data: { "username": username},
+            success: function (result) {
+                if (result["user_msg"] !== ''){
+                    document.getElementById('check_username').style.color = 'red';
+                    document.getElementById('check_username').innerHTML = "username " + result["user_msg"] + " is already taken";
+                } else {
+                    document.getElementById('check_username').innerHTML = ""
+                }
+            }
+        });
+    });
+    $("#email").change(function () {
+        var email = $("#email").val();
+        $.ajax({
+            type: "POST",
+            url: '/check_email/',
+            data: { "email": email},
+            success: function (result) {
+                if (result["email_msg"] !== ''){
+                    document.getElementById('check_email').style.color = 'red';
+                    document.getElementById('check_email').innerHTML = result["email_msg"] + " is already taken";
+                } else {
+                    document.getElementById('check_email').innerHTML = ""
+                }
+            }
+        });
+    });
+</script>
+{% endblock content %}

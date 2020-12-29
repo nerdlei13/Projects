@@ -1,0 +1,342 @@
+p
+/* text align format */
+
+div.a {
+    text-align: center;
+}
+
+div.b {
+    text-align: left;
+}
+
+div.c {
+    /* text-align: right; */
+    float: right;
+    margin: -40px 5px;
+}
+
+
+/* text font and resize format */
+
+div.d {
+
+}
+
+
+/* small green box with grey border */
+
+div.greenbox{
+    
+    border-style: solid;
+    border-width: 1px solid #D9D9D9;
+    padding: 10px;
+    color: white;
+    /*background-color: #679868;*/
+    /* background-color: #00cc00; */
+    background-color: rgb(0, 78, 56);
+    
+    /* Sac State Green rgb*/
+}
+
+div.greenbox1 {
+    border-style: solid;
+    border-width: 2px solid #D9D9D9;
+    padding: 20px;
+    color: white;
+    /*background-color: #679868;*/
+    background: rgb(0, 78, 56);
+    /* Sac State Green rgb*/
+    /* background-color: #00cc00; */
+}
+
+
+/* Textbox background color - email*/
+
+input[type="text"],
+textarea {
+    opacity: 1;
+}
+
+
+/* Textbox background color - password*/
+
+input[type="password"],
+textarea {
+    opacity: 1;
+}
+
+
+/* Title formatting */
+
+h1 {
+    font-family: Unispace;
+    font-size: 36px;
+    color: rgb(0, 78, 56);
+    text-align: center;
+    /* margin-left: 500px; */
+    /* margin-right: 450px; */
+    /* background-image: url("crawler.png"); */
+    /* background-repeat: no-repeat; */
+    /* background-size: 55px 52px; */
+}
+
+hr.new1 {
+    border-top: 1px solid black;
+}
+
+*/
+/* Link formatting */
+
+a:link {
+    text-decoration: none;
+    color: white;
+}
+
+a:visited {
+    text-decoration: none;
+    /* color: rgb(20,206,245); */
+    color: #116FE2;
+}
+
+a:hover {
+    /* text-decoration: underline; */
+    color: rgb(230, 183, 17);
+}
+
+a:active {
+    text-decoration: underline;
+}
+
+a.2 :link {
+    font-family: Georgia;
+    text-decoration: none;
+    color: #45B5FF;
+}
+
+a.2:visited {
+    /* color: rgb(28,254,252); */
+    color: #1D9BEF;
+}
+
+
+/* *{ */
+
+
+/* box-sizing: border-box; */
+
+
+/* } */
+
+div.pageBorder {
+    text-align: center;
+    width: 200px;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+input {
+    box-shadow: 10px 10px 5px;
+}
+
+
+/* button format*/
+
+button.button1 {
+    /* background-color: rgb(177,177,177); */
+    background-color: grey;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    font-size: 22px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+
+/* link format */
+
+a {
+    font-size: 15px;
+}
+
+
+/* list format*/
+
+ul.a {
+    list-style-type: dot;
+    font-size: 15px;
+}
+
+p.style1 {
+    font-size: 15px;
+    font-family: monospace;
+    opacity: 0.8;
+}
+
+p.solid {
+    border-style: solid;
+    border-width: thin;
+}
+
+body.color1 {
+    background-color: #F3F3F3;
+    margin: 0;
+    padding-bottom: 50px;
+    font-family: Roboto, sans-serif;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+
+/* Sac State color*/
+
+body.color2 {
+    /*background-color: #465D43;*/
+    background-color: rgb(192,192,192);
+    /* Sac State Color  */
+    margin: 0;
+    padding-bottom: 50px;
+    font-family: Roboto, sans-serif;
+    font-size: 15px;
+    /* color: #ffffff; */
+    color: black;
+    line-height: 1.4;
+}
+
+
+/*Center the content and leave a space at the bottom*/
+
+.divBody {
+    margin: 10px;
+    margin-bottom: 10%;
+}
+
+.centerContent {
+    max-width: 900px;
+    margin: auto;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*crawling button style in the first homepage */
+
+.button {
+    display: inline-block;
+    border-radius: 4px;
+    /* background-color: #f4511e; */
+    /* background-color: #6ACA6B; */
+    /*background-color: #08B644;*/
+    background-color: #85adad;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 18px;
+    padding: 10px;
+    width: 100px;
+    /*transition: all 0.5s;*/
+    cursor: pointer;
+    margin: 5px;
+}
+
+
+/* login button */
+
+.login {
+    display: inline-block;
+    border-radius: 4px;
+    /* background-color: #f4511e; */
+    /* background-color: #6ACA6B; */
+    /*background-color: #1BC756;*/
+    background-color: rgb(170, 152, 94);
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 15px;
+    padding: 5px;
+    width: 100px;
+    transition: all 0.5s;
+    cursor: pointer;
+    /* float: right; */
+    margin: -50px 0px;
+}
+
+
+/* .login:hover {
+  background-color: #E0CF0B;
+} */
+
+.button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    /*transition: 0.5s;*/
+}
+
+.button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    /*transition: 0s;*/
+}
+
+.button:hover span {
+    padding-right: 25px;
+}
+
+.button:hover span:after {
+    /*opacity: 1;*/
+    right: 0;
+}
+
+
+/*searching for url button*/
+
+.buttonPadding {
+    padding: 10px 40px 10px 40px;
+}
+
+.buttonFont {
+    font-size: 20px;
+}
+
+#wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.right {
+    position: absolute;
+    right: 0px;
+    width: 300px;
+    padding: 10px;
+}
+
+
+/*Result button style*/
+
+.buttonSearch {
+    background-color: #f4511e;
+    /* background-color: #6aca6b; */
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    font-size: 16px;
+    font-family: Courier New;
+    margin: 4px 2px;
+    opacity: 0.6;
+    transition: 0.3s;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.buttonSearch:hover {
+    opacity: 1
+}

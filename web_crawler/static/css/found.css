@@ -1,0 +1,157 @@
+/* background format */
+body
+{
+	margin: 0;
+	padding: 0;
+	/* background: #efefef; */
+	/* background-color: rgb(192,192,192); */
+	background-color: #D5D5D5;
+	font-size: 16px;
+	color: #777;
+	font-family: sans-serif;
+	font-weight: 300;
+}
+/* title format */
+h1.title 
+{
+	font-family: Unispace;
+	font-size: 36px;
+	color: #00802b;
+	text-align: center;
+	/* background-size: 55px 52px; */
+	/* padding: 10px;	 */
+	padding-top: 25px;
+	/* margin-left: 600px; */
+	/* margin-right: 620px; */
+}
+h1.new1 {
+	margin-top: 0;
+	color: #292E31;
+	font-size: 19px;
+	font-weight: bold;
+	text-align: left;
+}
+p.p1 {
+	margin-top: 0;
+    color: #839197;
+    font-size: 18px;
+    line-height: 1.5em;
+    text-align: left;
+}
+h2.new1 {
+	margin-top: -40;
+    color: #292E31;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+	float: left;
+	padding-left: 150px;
+	/* padding-bottom: 50px; */
+	/* font-style: italic; */
+}
+div.logo {
+    position: absolute;
+	left: 590;
+	top: 25;
+}
+
+/* border */
+hr.new1 {
+	/* border-top: 1px solid black; */
+	margin-top: 1.0 em;
+	border-width: 3px solid grey;
+}
+
+/* form box */
+#retrieval-box
+{
+	position: relative;
+	margin: 5% auto;
+	height: 320px;
+	width: 800px;
+	background: #fff;
+	/* background-color: #FFF9E7; */
+	box-sizing: border-box;
+	padding: 40px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* form box title */
+h1
+{
+	margin: 0 0 20px 0;
+	font-weight: 300;
+	font-size: 28px;
+}
+/* textbox format */
+input[type="text"],
+input[type="password"]
+{
+	display: block;
+	box-sizing: border-box;
+	margin-bottom: 20px;
+	padding: 4px;
+	width: 250px;
+	height: 32px;
+	border: none;
+	outline: none;
+	border-bottom: 1px solid #aaa;
+	font-family: sans-serif;
+	font-weight: 400;
+	font-size: 15px;
+	transition: 0.2s ease;
+	background-color: #e8f0fe;
+}
+/* submit button */
+input[type="submit"]
+{
+	margin-bottom: 28px;
+	width: 200px;
+	height: 32px;
+	background: #005d3b;
+	border: none;
+	border-radius: 2px;
+	color: #fff;
+	font-family: sans-serif;
+	font-weight: 500;
+	text-transform: uppercase;
+	transition: 0.2s ease;
+	cursor: pointer;
+}
+
+input[type="submit"]:hover,
+input[type="submit"]:focus
+{
+	/* background:  #ff5722; */
+	background: #c4c081;
+	transition: 0.2s ease;
+}
+
+button.login
+{
+	margin-bottom: 20px;
+	width: 220px;
+	height: 36px;
+	border: none; 
+	border-radius: 2px;
+	color: #fff;
+	font-family: sans-serif;
+	font-weight: 500;
+	transition: 0.2s ease;
+	cursor: pointer;
+}
+
+.student
+{
+	background: #005d3b;
+}
+
+.professor
+{
+	background: #897e5a;
+}
+
+.administrator
+{
+	background: #c4c081;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>C.R.A.W.L Homepage</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="button.css">
+		<script
+			src="http://code.jquery.com/jquery-3.4.1.js"
+			integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+			crossorigin="anonymous">
+		</script>
+		<script>
+			$(function(){
+				$("#header").load("header.html");
+			});
+		</script>
+	</head>
+	
+	<body class="color2">
+		<div id="header"></div>
+		<h1>C.R.A.W.L</h1>
+		<div class="divBody centerContent">
+			<hr class="new1"> <!-- Horizonal line break -->
+			<h2>Introduction</h2>
+
+			<!-- <p>Welcome to C.R.A.W.L. <b><i>Configured Real-Time Application Web Lurker</b></i>
+			The purpose of this web <br> application is to help users find information that's relevant to
+			their occupation. Helping users who <br> want to research more information from the web without
+			having to through those websites is what “C.R.A.W.L” can do best. </p> -->
+			
+			<p>Welcome to C.R.A.W.L. <b><i>Configured Real-Time Application Web Lurker.</i></b> The purpose of this web <br>
+			application is to help Sac State users find information that's relevant to their needs on Reddit. Helping users who
+			want to research more information from Reddit without having to through millions of posts is what “C.R.A.W.L” can do best.</p>
+			
+			<!-- Login Box -->
+			
+			<div class="greenbox">
+			<div class="bg-image">
+			<form>
+				<label for="email">Email:</label><br>
+				<input type="text" id="email" name="email" style="style.css"><br>
+				<label for="pwd">Password:</label><br>
+				<input type="password" id="pwd" name="pwd" style="style.css">
+				<button class="button"><a href="crawler_page2.html">Login</a></button>
+			</form>
+			</div>
+			</div>
+			
+			<h2>Features</h2>
+			<ul class="a">
+			  <li>Allow the user to type in an address to a website and to type in specific terms to extract from that said website to produce a report.</li>
+			  <dd>(I'm still assuming that a website address text is needed before executing the web crawler through button)</dd>
+			  <br>
+			  <li>The purpose for this web crawler can be used for any purpose:</li>
+			  <dd><li>Universities collect data from students participating in forums</li></dd>
+			  <dd><li>A commercial company wants to get reports generated from social media to see how their brand is selling.</li></dd>
+			  <dd><li>Political groups can generate real-time reports on the current political climate</li><dd>
+			  <dd><li>Smaller businesses can see this web crawler as an opportunity to grow their business based on the feedback
+			  collected from various websites reviewing them and based on how well the reception of their products are.</li></dd>
+			 <dd><li>Users (as a group or an individual) can share their results with others. (Email and social media?)</li></dd>
+			  <br>
+			  <li>List more features....</li>
+			</ul>
+			
+			<div class="greenbox">
+				<div class="b">
+					<p>With CRAWL you can use for it if you're:</p>
+					<div class="right">
+						<button class="button" style=right"><a href="crawler_page2.html"><span>CRAWL </span></a></button>
+					</div>
+					<dd><li>A University trying to collect data from students participating in forums</li>
+					<li>A Professor curious about real, honest reviews about your classes</li>
+					<li>A Sac State student wondering about the difficulty of a certain class</li>
+					<li>Curious about Sac State News</li>
+					<li>Trying to report real-time posts about incidents on campus</li></dd>			
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="{% static 'css/adminStyles.css' %}">
+	<script type="text/javascript"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+	<title>Admin Console</title>
+	<label class="switch">
+		<input type="checkbox">
+		<span class="slider round"></span>
+	  </label>
+</head>
+
+
+<body>
+	<div class="nav-btn">Admin Options</div>
+	<div class="container">
+
+		<div class="sidebar">
+			<nav>
+				<a href="#"><span>Show Users Chart</span></a>
+				{% if user.is_authenticated%}
+					<h4 style="color: white; text-align: center">Welcome {{request.user.username}}</h4>
+				{% endif %}
+				<ul>
+					<!--<li class="active"><a href="#"></a>Download Search</li> needs functionality-->
+					<li class="active"><a href="{% url 'index' %}">Home</a></li>
+					{% if user.is_superuser%}
+					<li class="active"><a href="{% url 'admin_console' %}">Admin Console</a></li>
+					{% endif %}
+					<li class="active"><a href="{% url 'advanced_search' %}">Advanced Search</a></li>
+					<li class ="active"><a href ="{% url 'show_users' %}">Active Users</a></li>
+                    <li class ="active"><a href ="{% url 'top5users' %}">Top 5 Users</a></li>
+                    <li class ="active"><a href ="{% url 'top5keywords' %}">Top 5 Key Words</a></li>
+					{% if user.is_authenticated%}
+					<!-- <li class="active"><a href="#"></a>SQL Database</li> -->
+					<li class="active"><a href="{% url 'logout' %}">Logout</a></li>
+					{% endif %}
+				</ul>
+			</nav>
+		</div>
+	</div>
+	
+	<div class="main-content">
+		<div class="button">
+			<a href="{% url 'show_users' %}">All Users</a>
+			<a href="{% url 'top5users' %}">Top 5 Users </a>
+			<a href="{% url 'top5keywords' %}">Top 5 Key Words</a>
+		</div> 
+	  
+	<!-- Buttons to switch charts: two different types-->
+	<a href="{% url 'top5users' %}" class="next"> Next &raquo;</a>
+	<br></br>
+
+
+    <!--show users-->
+        <div class="chart-container" style="position: relative; height:10vh; width:50vw">
+        <canvas id="user_chart" data-url="{% url 'topfiveusers' %}" width="600" height="600"></canvas>
+        </div>
+    <div>
+		<script>
+        $(function () {
+            var $myChart = $("#user_chart");
+            $.ajax({
+            url: $myChart.data("url"),
+            success: function (data) {
+
+                var ctx = $myChart[0].getContext("2d");
+                new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['August','September','October','November','December', 'January','February','March', 'April'],
+                    datasets: [{
+                    label: 'Users',
+                    fill: false,
+					borderColor: 'blue',
+					data: data.data,
+                    }]
+                },
+                options: {
+                    responsive: true,
+					maintainAspectRatio: true,	
+                    legend: {
+                    position: 'bottom',
+                    },
+                    title: {
+                    display: true,
+                    text: 'Current Users',
+                    
+					fontSize: 20
+                    },
+					
+					scales: {
+						yAxes: [{
+							ticks: {
+								fontSize: 20
+							}
+						}],
+						xAxes: [{
+							ticks: {
+								fontSize: 16
+							}
+						}]
+					},
+					
+					tooltips: {
+						titleFontSize: 16,
+						bodyFontSize: 16,
+					}
+                    }
+                });
+			 }
+		  });
+		});		
+		</script>
+		
+	</div>
+	
+</body>
+</html>

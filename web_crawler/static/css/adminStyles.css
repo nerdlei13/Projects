@@ -1,0 +1,224 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* button design */
+button {
+	margin-left: 10px;
+	margin-right: 10px;
+	padding: 9px 25px;
+	background-color: #A7D6FA;
+	border: none;
+	border-radius: 50px;
+	cursor: pointer;
+	transition: all 0.3s ease 0s;
+	font-size: 14px;
+}
+
+button:hover {
+	background-color: #89C9FB;
+}
+
+body, html {
+    font-family: "Trebuchet MS", Helvetic, sans-serif;
+    font-size: 20px;
+    height: 100%;
+    position: relative;
+}
+
+.clearfix:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+/*controls color of Admin Console*/
+.sidebar a {
+    color: white;
+    text-decoration: none;
+}
+
+.nav-btn {
+    width: 100%;
+    height: 30px;
+    padding-top: 4px;
+    color: white;
+    background-color: whitesmoke;
+    text-align: center;
+    cursor: pointer;
+    display: none;
+}
+
+.nav-btn:active {
+    background-color: white; 
+    color: white;
+}
+
+header {
+    font-size: 100%;
+    padding-top: 10px;
+    padding-left: 10px;
+    color: #264c6b;
+}
+
+.container {
+   /* width: 100%;*/
+    height: 100%;
+    position: fixed;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #071a30e8;
+    position: fixed;
+    top: 0px;
+    left: 0;
+    bottom: 0;
+    box-shadow: 2px 0px 10px rgb(255, 254, 254);
+}
+
+.sidebar nav > a {
+    font-size: 150%;
+    display: inline-block;
+    padding: 30px 30px;
+    padding-left: 30px;
+    transition: all 0.2s;
+    
+}
+
+.sidebar nav > a:hover{
+    opacity: 1;
+}
+
+.sidebar nav a span {
+    font-weight: 300;
+}
+
+.sidebar nav ul {
+    list-style: none;
+}
+
+.sidebar nav ul li {
+    font-size: 85%;
+    padding: 19px 0;
+    padding-left: 20px;
+    border-bottom: 0.5px solid #111;
+    color: whitesmoke;
+}
+
+/* changes color on hover on sidebar*/
+.sidebar nav ul li:hover {
+    background-color: rgb(102, 181, 184);
+}
+
+.sidebar nav ul li a {
+    color: lightgray;
+}
+
+.sidebar nav ul li:hover a{
+    color: black;
+}
+
+.main-content {
+    background-color:ghostwhite;
+    width: calc(100% -250px);
+    height: 150%;
+    margin-left: 250px;
+    padding: 45px 30px;
+}
+
+.main-content .panel-wrapper {
+    margin: 20px 0;
+    box-shadow: 0px 1px 5px rgb(12, 12, 12);
+    background-color: #264c6b;
+}
+
+.main-content .panel-wrapper .panel-head{
+    background-color: #071a30e8;
+    padding: 10px 10px;
+    border: 1px solid #071a30e8;
+    border-radius: 2px;
+}
+
+.main-content .panel-wrapper .panel-body {
+    padding: 20px 10px;
+    font-size: 80%;
+    border-radius: 2px;
+    border: 2px;
+    background-color: white;
+    overflow:auto
+}
+
+.rectangle{
+	/* position: absolute; */
+	/*left: 625px;
+	top: 90px;
+    /* width: 800px; */
+	width: 100%;
+}
+
+.input [type=text] {
+    height: 20%;
+    margin-left: 15px;
+    border: 2px solid white;
+    border-radius: 4px;
+    
+}
+/*PoC for graphing*/
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+.table-space {
+    margin-left: 386px;
+}
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.body-table {
+  background: #105469;
+  font-family: 'Open Sans', sans-serif;
+}
+table {
+  /* dark navy color */
+  /* background: #012B39; */
+  background: #fff;
+  border-radius: 0.25em;
+  border-collapse: collapse;
+  margin: 1em;
+}
+th {
+  border-bottom: 1px solid #364043;
+  background: #012B39;
+  color: #E2B842;
+  font-size: 0.85em;
+  font-weight: 600;
+  padding: 0.5em 1em;
+  text-align: left;
+}
+td {
+  /* added borders */
+	border-right: 1px solid black;
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+	border-bottom: 1px solid black;
+    color: #000;
+  /* color: #fff; */
+}
+.disabled td {
+  color: #4F5F64;
+}
+tbody tr {
+  transition: background 0.25s ease;
+}
+/* search table hover color */
+tbody tr:hover {
+	/* light cyan */
+  background: #93F2FF;
+  /* old color */
+  /* background: #014055; */
+}
+
+

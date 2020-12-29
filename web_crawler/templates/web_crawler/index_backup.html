@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+
+<head>
+    <title>C.R.A.W.L Homepage</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/button.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nav.css' %}">
+    <script src="http://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous">
+        </script>
+</head>
+
+<body class="color2">
+    <header>
+        <a href="{% url 'index' %}"><img class="logo" src="{% static 'images/crawler.png' %}" alt="crawler logo"></a>
+        <nav>
+            <ul class="nav_links">
+                <li><a href="#">ABOUT</a></li>
+                {% if request.user.is_superuser %}
+                    <li><a href="admin_page">CRAWL</a></li>
+                {% else %}
+                    <li><a href="regular_page">CRAWL</a></li>
+                {% endif %}
+                <li><a href="{% url 'default_page' %}">DEMO</a></li>
+            </ul>
+        </nav>
+        <div class="log-reg-group">
+            <!--if user logged in, then only logout present
+            if user not logged in, then login and sign up will present-->
+            {% if user.is_authenticated%}
+            <h4>Welcome {{request.user.username}}</h4>
+            <a href="{% url 'logout' %}"><button>LOGOUT</button></a>
+            {%else%}
+            <a href="{% url 'login' %}"><button>LOGIN</button></a>
+            <a href="{% url 'register' %}"><button>SIGN UP</button></a>
+            {% endif %}
+
+        </div>
+    </header>
+    <div class="divBody centerContent">
+        <div class="body-left">
+            <section id="crawl">
+                <div class="info-box">
+
+                    <div class="greenbox">
+                        <p>Welcome to C.R.A.W.L. <b><i>Configured Real-Time Application Web Lurker.</i></b></p>
+                        <p>The purpose of this web application is to help Sac State users find information that's
+                            relevant
+                            to their needs on Reddit. This will help users who want to research more information from
+                            Reddit
+                            without having to through millions of posts
+                            is what “C.R.A.W.L” can do best.</p>
+                    </div>
+                    <br>
+                    <h2>Why use CRAWL?</h2>
+                    <div class="greenbox">
+                        <div class="b">
+                            <!--<p>With CRAWL you can use it for if you're:</p>-->
+                            <p>Following ways you can use CRAWL:</p>
+                            <ul>
+                                <li>A University trying to collect data from students participating in forums</li>
+                                <li>A Professor curious about real, honest reviews about your classes</li>
+                                <li>A Sac State student wondering about the difficulty of a certain class</li>
+                                <li>Curious about Sac State News</li>
+                                <li>Trying to report real-time posts about incidents on campus</li>
+                            </ul>
+                            <p>More important aspects of CRAWL:</p>
+
+                            <ul>
+                                <li>Different levels of CRAWL depending on account type of user. (ie. student,
+                                    professor,
+                                    administrator)</li>
+                                <li>Advanced search functions are provided to all users to simplify their searches.</li>
+                                <li>Varies on the user access level of CRAWL. (Higher level = most advanced functions
+                                    available.) (Lower level = only basic advanced search functions available.)</li>
+                                <li>Examples of Advanced search functions: From and To dates, search topics, additional
+                                    keywords to simplify the general searches.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+
+</html>

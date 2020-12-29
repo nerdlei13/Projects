@@ -1,0 +1,366 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+/*erase the scrollbar*/
+html {
+  overflow: scroll;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+/*navbar*/
+.navbar {
+  display: flex;
+  position: relative;
+  justify-content: space-around;
+  align-items: center;
+  background-color: white;
+  border-bottom: 5px solid #77d2bb;
+  top: 0;
+  position: fixed;
+  width: 100%;
+}
+
+.navbar {
+  font-size: 20px;
+  font-weight: 700;
+  color: #20689f;
+  text-decoration: none;
+}
+
+.logo {
+  margin: 0;
+  width: 82px;
+}
+
+.navbar-links {
+  height: 100%;
+}
+
+.navbar-links ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links li {
+  list-style: none;
+}
+
+.navbar-links li a {
+  display: block;
+  text-decoration: none;
+  color: #20689f;
+  padding: 1rem;
+}
+
+.navbar-links a:hover {
+  background-color: #20689f;
+  color: white;
+}
+
+.toggle-button {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+}
+
+.toggle-button .bar {
+  height: 3px;
+  width: 100%;
+  background-color: #20689f;
+  border-radius: 10px;
+}
+
+/*-----------------------------------body container---------------------------------*/
+.middle-body {
+  max-width: 70%;
+  margin: 0 auto;
+  padding-top: 60px;
+  background: white;
+  box-shadow: 0 0 10px black;
+}
+
+/*===================================introduction section===========================*/
+.intro-title {
+  padding-top: 20px;
+  font-size: 30px;
+  font-family: "Fredericka the Great", cursive;
+  text-align: center;
+  color: #20689f;
+}
+
+.intro {
+  margin: 20px;
+  padding: 30px 18px;
+  /* background: #ffc874; */
+  background: #ffd98e;
+  border: 3px solid black;
+  border-radius: 15px;
+}
+
+.intro-detail {
+  color: black;
+  font-family: "Dosis", sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/*=========================================Why use crawl section?=======================================*/
+.crawl-title {
+  font-size: 30px;
+  text-align: center;
+  color: #20689f;
+  font-family: "Fredericka the Great", cursive;
+}
+
+.crawl {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+}
+
+.item {
+  font-family: "Dosis", sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  width: 100%;
+  padding: 20px;
+  border: 2px solid black;
+  /* background: #ffc874; */
+  background: #ffd98e;
+}
+
+.item ul {
+  padding: 20px;
+}
+/*================================================Implementation Section=============================================*/
+.imple-title {
+  padding-top: 20px;
+  font-size: 30px;
+  text-align: center;
+  color: #20689f;
+  font-family: "Fredericka the Great", cursive;
+}
+
+.implementation {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background: #77d2bb;
+}
+
+.imple-detail {
+  margin: 30px 20px;
+  font-family: "Dosis", sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+  font-family: "Dosis", sans-serif;
+  /* background: #ffc874; */
+  background: #ffd98e;
+  background: #ffc874;
+  border: 3px solid black;
+  border-radius: 10px;
+}
+
+.imple-detail p {
+  padding: 20px;
+  font-family: "Dosis", sans-serif;
+  /* background: #ffc874; */
+  background: #ffd98e;
+}
+
+/*===============================================try out demo section====================================================*/
+.demo-title {
+  padding-top: 20px;
+  font-size: 30px;
+  font-family: "Fredericka the Great", cursive;
+  text-align: center;
+  color: #20689f;
+}
+
+.demo {
+  padding: 20px;
+}
+
+.demo-detail {
+  padding: 20px 40px;
+  text-align: center;
+  border: 3px solid black;
+  border-radius: 15px;
+  /* background: #ffc874; */
+  background: #ffd98e;
+  font-size: 20px;
+  font-family: "Dosis", sans-serif;
+  font-weight: bold;
+}
+
+.demo-detail button {
+  margin-top: 30px;
+}
+
+/*=================================================button customize==========================================*/
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #ffffff;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  font-family: "Fredericka the Great", cursive;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: "\00bb";
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+/*mobile design*/
+@media (max-width: 1080px) {
+  .middle-body {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 670px) {
+  /*navbar responsive*/
+  .logo {
+    margin: 15px;
+    width: 40px;
+  }
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .toggle-button {
+    display: flex;
+  }
+
+  .navbar-links {
+    display: none;
+    width: 100%;
+  }
+
+  .navbar-links ul {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .navbar-links ul li {
+    text-align: center;
+  }
+
+  .navbar-links ul li a {
+    padding: 0.5rem 1rem;
+  }
+
+  .navbar-links.active {
+    display: flex;
+  }
+
+  /*body section*/
+  .middle-body {
+    max-width: 100%;
+  }
+
+  /*introduction responsive*/
+  .intro-title {
+    font-size: 20px;
+  }
+
+  .intro-detail {
+    font-size: 15px;
+    padding: 10px;
+  }
+
+  /*crawl reponsive*/
+  .crawl-title {
+    font-size: 20px;
+  }
+
+  .crawl {
+    flex-wrap: wrap;
+  }
+
+  .item {
+    font-size: 15px;
+    border-radius: 15px;
+    margin: 20px;
+  }
+
+  .item p {
+    font-size: 18px;
+  }
+
+  /*implementation responsive*/
+  .imple-title {
+    font-size: 20px;
+  }
+
+  .implementation {
+    flex-wrap: wrap;
+  }
+
+  .imple-detail {
+    width: 100%;
+    font-size: 15px;
+    margin: 15px 60px;
+  }
+
+  .imple-detail p {
+    padding: 20px;
+  }
+
+  /*demo responsive*/
+  .demo-title {
+    font-size: 20px;
+  }
+
+  .demo-detail {
+    font-size: 15px;
+    padding: 20px 20px;
+  }
+}

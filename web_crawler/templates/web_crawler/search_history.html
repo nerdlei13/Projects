@@ -1,0 +1,9 @@
+<!-- search_history.html -->
+
+{% for each in data %}
+	<tr>
+		<td>{{each.subreddit}}</td>
+		<td>{{each.keyword}}</td>
+		<td>{{each.timestamp}}</td>
+	</tr>
+{% endfor %}

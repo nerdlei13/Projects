@@ -1,0 +1,227 @@
+body
+{
+	margin: 0;
+	padding: 0;
+	/* background: #DFDA95; */
+	background-color: rgb(192,192,192);
+	font-size: 16px;
+	font-family: sans-serif;
+	font-weight: 300;
+	height:100%;
+}
+
+div.image {
+  position: absolute;
+  top: 25;
+  left: 25;
+}
+div.links {
+	position: absolute;
+	top: 200;
+	left: 50;
+}
+div.titleborder {
+	position: absolute;
+	left: 220;
+	top: 65;
+	border-style: solid;
+	border-color: #CCCCCC;
+	background: #878787;
+}
+/* logout button */
+div.logout {
+	position: absolute;
+	right: 100;
+	top: 175;
+}
+
+div.logo {
+    position: absolute;
+	left: 220;
+	top: 25;
+}
+
+/* border */
+hr.new1 {
+	left: 0;
+	top: 300;
+	/* border-top: 1px solid black; */
+	margin-top: 14.5em;
+	border-width: 3px solid grey;
+}
+
+/* search level label position */
+div.searchlabel {
+	position: absolute;
+	right: 400;
+	top: 40;
+}
+/* search level output position */
+div.searchvalue {
+	position: absolute;
+	right: 100;
+	top: 40;
+	width: 300px;
+	height: 100px;
+	border-style: solid;
+	border-color: #CCCCCC;
+	background: #878787;
+}
+div.right-date {
+	position: absolute;
+	left: 275;
+	bottom: 0;
+}
+div.searchbuttons {
+	position: absolute;
+	left: 0;
+	bottom: -150;
+	/* padding-right: 50px; */
+}
+div.searchsubjectalign {
+	position: absolute;
+	left: 0;
+	bottom: -50;
+}
+div.output_box_align {
+
+}
+div.resultlabel {
+	position: absolute;
+	right: -200;
+	top: 0;
+}
+div.resultback {
+	position: absolute;
+	right: -200;
+	bottom: -540;
+}
+div.resultnext {
+	position: absolute;
+	right: -900;
+	bottom: -540;
+}
+
+div.search_history{
+	width:510;
+    height:150;
+    background-color:white;
+    color: black;
+    overflow: scroll;
+    padding-left: 10px;
+}
+body.color2 {
+    /*background-color: #465D43;*/
+    background-color: rgb(192,192,192);
+    /* Sac State Color  */
+    margin: 0;
+    padding-bottom: 50px;
+    font-family: Roboto, sans-serif;
+    font-size: 15px;
+    /* color: #ffffff; */
+    color: black;
+    line-height: 1.4;
+}
+#login-box
+{
+	position: relative;
+	opacity: 1;
+	margin: 5% auto;
+	height: 350px;
+	width: 600px;
+	background: #c4c081;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.left-box
+{
+	position: absolute;
+	top: 250;
+	left: 50;
+	box-sizing: border-box;
+	/* padding: 5px 0px 0px 0px; */
+	color: white;
+	font-size: 18px;
+}
+
+h1
+{
+	text-align: center;
+	padding: 5;
+	font-weight: 300;
+	font-size: 36px;
+	color: #FFFFFF;
+	font-family: Unispace;
+}
+/* textbox format */
+input[type="text"],
+input[type="password"]
+{
+	display: block;
+	box-sizing: border-box;
+	margin-bottom: 20px;
+	padding: 4px;
+	width: 520px;
+	height: 32px;
+	border: none;
+	outline: none;
+	border-bottom: 1px solid #aaa;
+	font-family: sans-serif;
+	font-weight: 400;
+	font-size: 15px;
+	transition: 0.2s ease;
+	/* background-color: #e8f0fe; */
+}
+
+input[type="submit"]
+{
+	margin-bottom: 28px;
+	width: 120px;
+	height: 32px;
+	background: #E5D152;
+	border: none;
+	border-radius: 2px;
+	color: #fff;
+	font-family: sans-serif;
+	font-weight: 500;
+	text-transform: uppercase;
+	transition: 0.2s ease;
+	cursor: pointer;
+}
+
+input[type="submit"]:hover,
+input[type="submit"]:focus
+{
+	background:  #F2EA07;
+	transition: 0.2s ease;
+}
+
+button
+{
+	margin-bottom: 20px;
+	width: 100px;
+	height: 36px;
+	border: none; 
+	border-radius: 2px;
+	color: black;
+	font-family: sans-serif;
+	font-weight: 500;
+	font-size: 20px;
+	/* transition: 0.2s ease; */
+	cursor: pointer;
+}
+
+.student
+{
+	background: #005d3b;
+}
+
+.professor
+{
+	background: #897e5a;
+}
+
+.administrator
+{
+	background: #c4c081;
+}

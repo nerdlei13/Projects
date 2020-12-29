@@ -1,0 +1,245 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="{% static 'css/master.css' %}">
+	<script type="text/javascript"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<title>Advanced Console</title>
+	<label class="switch">
+		<input type="checkbox">
+		<span class="slider round"></span>
+	  </label>
+</head>
+
+
+<body>
+	<div class="table-space">
+		<table id="search_history">
+			<thead>
+				<tr>
+					<th style="display:none;">id</th>
+					<th>Subreddit</th>
+					<th>Words in title</th>
+					<th>Words not in title</th>
+					<th>Words in comment</th>
+					<th>Words not in comment</th>
+					<th>Search Within</th>
+					<th>Search Limit</th>
+					<th>Timestamp</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for each in data %}
+					<tr>
+						<td id="search_id_table" style="display:none;">{{each.id}}</td>
+						<td id="subreddit_table">{{each.subreddit}}</td>
+						<td id="word_in_title_table">{{each.word_in_title}}</td>
+						<td id="word_not_in_title_table">{{each.word_not_in_title}}</td>
+						<td id="word_in_comment_table">{{each.word_in_comment}}</td>
+						<td id="word_not_in_comment_table">{{each.word_not_in_comment}}</td>
+						<td id="search_within_table">{{each.search_within}}</td>
+						<td id="search_limit_table">{{each.search_limit}}</td>
+						<td >{{each.timestamp}}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<div class="nav-btn">Admin Options</div>
+	<div class="container">
+
+		<div class="sidebar">
+			<nav>
+				<a href="#"><span>Admin Search Console</span></a>
+				{% if user.is_authenticated%}
+					<h4 style="color: white; text-align: center">Welcome {{request.user.username}}</h4>
+				{% endif %}
+				<ul>
+					<!--<li class="active"><a href="#"></a>Download Search</li> needs functionality-->
+					<li class="active"><a href="{% url 'index' %}">Home</a></li>
+					<li class="active"><a href="{% url 'regular_search' %}">Regular Search</a></li>
+					<li class="active"><a href="{% url 'search_subscription' %}">Search Subscription</a></li>
+					{% if user.is_superuser%}
+					<li class ="active"><a href ="{% url 'show_users' %}">Active Users</a></li>
+                    <li class ="active"><a href ="{% url 'top5users' %}">Top 5 Users</a></li>
+                    <li class ="active"><a href ="{% url 'top5keywords' %}">Top 5 Key Words</a></li>
+					{% endif %}
+					{% if user.is_authenticated%}
+					<!-- <li class="active"><a href="#"></a>SQL Database</li> -->
+					<li class="active"><a href="{% url 'logout' %}">Logout</a></li>
+					{% endif %}
+				</ul>
+			</nav>
+		</div>
+	</div>
+
+	<div class="main-content">
+		<div class="card-padding" style="height: 100%;">
+			<div class="panel-wrapper" style="height: 100%;">
+				<div class="panel-head">
+					<button id="crawlButton" class="button">Search</button>
+				</div>
+				<div class="panel-body" style="height: 100%;">
+					<form id="search_form">
+						<label for="subreddit">Subreddit to Search</label>
+						<input type="text" id="subreddit" name="subreddit" size="30">
+						<br>
+						<label for="word_in_title">Keywords in title</label>
+						<input type="text" id="word_in_title" name="word_in_title" size="30">
+						<br>
+						<label for="word_not_in_title">Keywords exclude in title</label>
+						<input type="text" id="word_not_in_title" name="word_not_in_title" size="30">
+						<br>
+						<label for="word_in_comment">Keywords in comments</label>
+						<input type="text" id="word_in_comment" name="word_in_comment" size="30">
+						<br>
+						<label for="word_not_in_comment">Keywords exclude in comments</label>
+						<input type="text" id="word_not_in_comment" name="word_not_in_comment" size="30">
+						<br>
+						<label for="search_within">Search within</label>
+						<select name="search_within" id="search_within">
+							<option>All the time</option>
+							<option>One day</option>
+							<option>One month</option>
+							<option>One week</option>
+							<option>One year</option>
+						</select>
+						<br>
+						<label for="search_limit">Limit search results to</label>
+						<select name="search_limit" id="search_limit">
+							<option>10</option>
+							<option>20</option>
+							<option>50</option>
+						</select>
+						<br>
+						<br>
+						<b><label>Want to subscribe to this search?</label></b>
+						<br>
+						<label for="email">Email</label>
+						<input type="text" id="email" name="email" size="30">
+						<br>
+						<label for="subscribed_frequency">Email me if there are new search results in</label>
+						<select name="subscribed_frequency" id="subscribed_frequency">
+							<option>10 minutes</option>
+							<option>1 hour</option>
+							<option>1 day</option>
+							<option>1 week</option>
+							<option>1 month</option>
+						</select>						
+						<br>
+						<input type="hidden" id="search_id" name="search_id" value="{{ search_id }}">
+						<button id="subscribe_button" class="button" type="button">Subscribe</button>
+					</form>
+					<div class="resultlabel">
+						<br><h2>Results</h2>
+						<!-- <div class="searchbuttons">
+							<button class="button">Clear</button>
+						</div> -->
+					</div>
+					<div class="rectangle" id="crawlOutput" style="color: black; overflow: auto; height: 80%;"></div>
+				</div>
+			</div>
+			<script>
+				$('#search_form').keypress(function (e) {
+					var key = e.which;
+					if(key == 13) {
+						$('#crawlButton').click();
+						return false;
+					}
+				});
+				$("#crawlButton").click(function () {
+					var subreddit = $("#subreddit").val();
+					var word_in_title = $("#word_in_title").val();
+					var word_not_in_title = $("#word_not_in_title").val();
+					var word_in_comment = $("#word_in_comment").val();
+					var word_not_in_comment = $("#word_not_in_comment").val();
+					var search_within = $("#search_within").val();
+					var search_limit = $("#search_limit").val();
+					$.ajax({
+						type: "POST",
+						url: '/advanced_output/',
+						data: { "subreddit": subreddit , 
+								"word_in_title": word_in_title,
+								"word_not_in_title": word_not_in_title,
+								"word_in_comment": word_in_comment,
+								"word_not_in_comment": word_not_in_comment,
+								"search_within": search_within,
+								"search_limit": search_limit,
+							},
+						success: function (result) {
+							$("#crawlOutput").html(result["output"]);
+							$("#search_id").val(result["search_id"]);
+							$.ajax({
+								type: "GET",
+								url: '/show_advanced_history/',
+								success: function (result) {
+									var new_search = result[0];
+									$("#search_history").prepend('<tr"><td id="subreddit_table">' + new_search.subreddit + 
+																'</td><td id="word_in_title_table">' + new_search.word_in_title + 
+																'</td><td id="word_not_in_title_table">' + new_search.word_not_in_title + 
+																'</td><td id="word_in_comment_table">' + new_search.word_in_comment + 
+																'</td><td id="word_not_in_comment_table">' + new_search.word_not_in_comment + 
+																'</td><td id="search_within_table">' + new_search.search_within + 
+																'</td><td id="search_limit_table">' + new_search.search_limit + 
+																'</td><td>' + new_search.timestamp + "</td></tr>");
+								}
+							});
+						}
+					});
+				});
+				$("#search_history tbody").on("click", "tr", function () {
+					var rowData = {}
+					var subreddit = $(this).find('#subreddit_table').text()
+					var word_in_title = $(this).find('#word_in_title_table').text()
+					var word_not_in_title = $(this).find('#word_not_in_title_table').text()
+					var word_in_comment = $(this).find('#word_in_comment_table').text()
+					var word_not_in_comment = $(this).find('#word_not_in_comment_table').text()
+					var search_within = $(this).find('#search_within_table').text()
+					var search_limit = $(this).find('#search_limit_table').text()
+					var search_id = $(this).find('#search_id_table').text()
+					rowData["subreddit"] = subreddit;
+					rowData["word_in_title"] = word_in_title;
+					rowData["word_not_in_title"] = word_not_in_title;
+					rowData["word_in_comment"] = word_in_comment;
+					rowData["word_not_in_comment"] = word_not_in_comment;
+					rowData["search_within"] = search_within;
+					rowData["search_limit"] = search_limit;
+				    console.log(rowData);
+				    $("#subreddit").val(subreddit);
+				    $("#word_in_title").val(word_in_title);
+				    $("#word_not_in_title").val(word_not_in_title);
+				    $("#word_in_comment").val(word_in_comment);
+				    $("#word_not_in_comment").val(word_not_in_comment);
+				    $("#search_within").val(search_within);
+				    $("#search_limit").val(search_limit);
+				    $("#search_id").val(search_id);
+				    $.ajax({
+						type: "POST",
+						url: '/advanced_output/',
+						data: rowData,
+						success: function (result) {
+							$("#crawlOutput").html(result["output"]);
+						}
+					});
+				});
+				$("#subscribe_button").click(function () {
+					var email = $("#email").val();
+					var subscribed_frequency = $("#subscribed_frequency").val();
+					var search_id = $("#search_id").val();
+					console.log(search_id);
+					$.ajax({
+						type: "POST",
+						url: '/advanced_search_subscribe/',
+						data: { "search_id": search_id, "email": email , "subscribed_frequency": subscribed_frequency },
+						success: function (result) {
+							console.log("subscribed");
+							alert("Thank you for subscribing. We'll email you if there are new search results.");
+						}
+					});
+				});
+			</script>
+
+</body>
+</html>

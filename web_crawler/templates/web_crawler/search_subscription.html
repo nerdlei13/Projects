@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="{% static 'css/master.css' %}">
+	<script type="text/javascript"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<title>Search Console</title>
+	<label class="switch">
+		<input type="checkbox">
+		<span class="slider round"></span>
+	  </label>
+</head>
+
+
+<body>
+	<div class="table-space">
+		<h2 style="align: center;">Regular Search Subscription</h2>
+		<table id="regular_search_subscription">
+			<thead>
+				<tr>
+					<th style="display:none;">id</th>
+					<th>Subreddit</th>
+					<th>Search Phrase</th>
+					<th>Timestamp</th>
+					<th>Subscribed Frequency</th>
+					<th>Remove this search?</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for each in regular_search_subscription %}
+					<tr>
+						<td id="search_id_table" style="display:none;">{{each.id}}</td>
+						<td id="subreddit_table">{{each.subreddit}}</td>
+						<td id="search_word">{{each.keyword}}</td>
+						<td>{{each.timestamp}}</td>
+						<td id="subscribed_frequency">{{each.subscribed_frequency}}</td>
+						<td><button type="button" class="btn btn-danger" style="display: block; margin: auto;">Delete</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<h2>Advanced Search Subscription</h2>
+		<table id="advanced_search_subscription">
+			<thead>
+				<tr>
+					<th style="display:none;">id</th>
+					<th>Subreddit</th>
+					<th>Words in title</th>
+					<th>Words not in title</th>
+					<th>Words in comment</th>
+					<th>Words not in comment</th>
+					<th>Search Within</th>
+					<th>Search Limit</th>
+					<th>Timestamp</th>
+					<th>Subscribed Frequency</th>
+					<th>Remove this search?</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for each in advanced_search_subscription %}
+					<tr>
+						<td id="search_id_table" style="display:none;">{{each.id}}</td>
+						<td id="subreddit_table">{{each.subreddit}}</td>
+						<td id="word_in_title_table">{{each.word_in_title}}</td>
+						<td id="word_not_in_title_table">{{each.word_not_in_title}}</td>
+						<td id="word_in_comment_table">{{each.word_in_comment}}</td>
+						<td id="word_not_in_comment_table">{{each.word_not_in_comment}}</td>
+						<td id="search_within_table">{{each.search_within}}</td>
+						<td id="search_limit_table">{{each.search_limit}}</td>
+						<td >{{each.timestamp}}</td>
+						<td id="subscribed_frequency">{{each.subscribed_frequency}}</td>
+						<td><button type="button" class="btn btn-danger" style="display: block; margin: auto;">Delete</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<div class="container">
+		<div class="sidebar">
+			<nav>
+				<a href="#"><span>Search Console</span></a>
+				{% if user.is_authenticated%}
+					<h4 style="color: white; text-align: center">Welcome {{request.user.username}}</h4>
+				{% endif %}
+				<ul>
+					<!--<li class="active"><a href="#"></a>Download Search</li> needs functionality-->
+					<li class="active"><a href="{% url 'index' %}">Home</a></li>
+					<li class="active"><a href="{% url 'regular_search' %}">Regular Search</a></li>
+					<li class="active"><a href="{% url 'advanced_search' %}">Advanced Search</a></li>
+					{% if user.is_superuser%}
+					<li class ="active"><a href ="{% url 'show_users' %}">Active Users</a></li>
+                    <li class ="active"><a href ="{% url 'top5users' %}">Top 5 Users</a></li>
+                    <li class ="active"><a href ="{% url 'top5keywords' %}">Top 5 Key Words</a></li>
+					{% endif %}
+					{% if user.is_authenticated%}
+					<!-- <li class="active"><a href="#"></a>SQL Database</li> -->
+					<li class="active"><a href="{% url 'logout' %}">Logout</a></li>
+					{% endif %}
+				</ul>
+			</nav>
+		</div>
+	</div>
+	<script>
+		$('#regular_search_subscription').on('click', 'button', function(e){
+			var search_id = $(this).closest('tr').find('#search_id_table').text()
+			$.ajax({
+				type: "POST",
+				url: '/search_unsubscribe/',
+				data: { "search_id": search_id},
+				success: function (result) {
+					console.log("unsubscribed");
+				}
+			});
+			$(this).closest('tr').remove()
+		})
+
+		$('#advanced_search_subscription').on('click', 'button', function(e){
+			var search_id = $(this).closest('tr').find('#search_id_table').text()
+			$.ajax({
+				type: "POST",
+				url: '/advanced_search_unsubscribe/',
+				data: { "search_id": search_id},
+				success: function (result) {
+					console.log("unsubscribed");
+				}
+			});
+			$(this).closest('tr').remove()
+		})
+	</script>
+</body>
+</html>

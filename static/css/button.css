@@ -1,0 +1,118 @@
+/*crawling button style in the first homepage */
+
+.button {
+    display: inline-block;
+    border-radius: 4px;
+    /* background-color: #f4511e; */
+    /* background-color: #6ACA6B; */
+    /*background-color: #08B644;*/
+    background-color: #85adad;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 18px;
+    padding: 10px;
+    width: 100px;
+    /*transition: all 0.5s;*/
+    cursor: pointer;
+    margin: 5px;
+}
+
+
+/* login button */
+
+.login {
+    display: inline-block;
+    border-radius: 4px;
+    /* background-color: #f4511e; */
+    /* background-color: #6ACA6B; */
+    /*background-color: #1BC756;*/
+    background-color: rgb(170, 152, 94);
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 15px;
+    padding: 5px;
+    width: 100px;
+    transition: all 0.5s;
+    cursor: pointer;
+    /* float: right; */
+    margin: -50px 0px;
+}
+
+
+/* .login:hover {
+  background-color: #E0CF0B;
+} */
+
+.button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    /*transition: 0.5s;*/
+}
+
+.button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    /*transition: 0s;*/
+}
+
+.button:hover span {
+    padding-right: 25px;
+}
+
+.button:hover span:after {
+    /*opacity: 1;*/
+    right: 0;
+}
+
+
+/*searching for url button*/
+
+.buttonPadding {
+    padding: 10px 40px 10px 40px;
+}
+
+.buttonFont {
+    font-size: 20px;
+}
+
+#wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.right {
+    position: absolute;
+    right: 0px;
+    width: 300px;
+    padding: 10px;
+}
+
+
+/*Result button style*/
+
+.buttonSearch {
+    background-color: #f4511e;
+    /* background-color: #6aca6b; */
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    font-size: 16px;
+    font-family: Courier New;
+    margin: 4px 2px;
+    opacity: 0.6;
+    transition: 0.3s;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.buttonSearch:hover {
+    opacity: 1
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+
+<head>
+    <title>You've logged out!</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/index1.css' %}">
+    <script src="{% static 'javascript/script.js' %}" defer></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div>
+			<a href="{% url 'index' %}"><img class="logo" src="{% static 'images/logo.png' %}" alt="logo"></a>
+		</div>
+        <a href="#" class="toggle-button">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </a>
+        <div class="navbar-links">
+            <ul>
+                <li><a href="{% url 'index' %}">HOME</a></li>
+                {% if user.is_authenticated%}
+                <li><a href="regular_search">CRAWL</a></li>
+                {% endif %}
+                <li><a href="{% url 'crawl_demo' %}">DEMO</a></li>
+                {% if user.is_authenticated%}
+                <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+                {%else%}
+                <li><a href="{% url 'login' %}">LOGIN</a></li>
+                <li><a href="{% url 'register' %}">REGISTER</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <div class="middle-body" style="height: 98.2vh">
+        <p style="font-size: 30px; color: black; padding: 20px;">You've logged out.</p>
+        <p style="font-size: 20px; color: black; padding: 20px;">You will be redirected in 3 seconds.. </p>
+    </div>
+    <!-- This script is to automate page redirect after someone logs out -->
+    <script>
+        setTimeout(function(){
+           window.location.href = "{% url 'index' %}";
+        }, 3000);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to CRAWL!</title>
+    <link rel="stylesheet" href="{% static 'css/index1.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300&family=Poppins:wght@500&display=swap"
+        rel="stylesheet">
+    <script src="{% static 'javascript/script.js' %}" defer></script>
+</head>
+
+<body>
+	<nav class="navbar">
+        <div>
+			<a href="{% url 'index' %}"><img class="logo" src="{% static 'images/logo.png' %}" alt="logo"></a>
+		</div>
+        <a href="#" class="toggle-button">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </a>
+        <div class="navbar-links">
+            <ul>
+                <li><a href="{% url 'index' %}">HOME</a></li>
+                {% if user.is_authenticated%}
+                <li><a href="regular_search">CRAWL</a></li>
+                {% endif %}
+                <li><a href="{% url 'crawl_demo' %}">DEMO</a></li>
+                {% if user.is_authenticated%}
+                <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+                {%else%}
+                <li><a href="{% url 'login' %}">LOGIN</a></li>
+                <li><a href="{% url 'register' %}">REGISTER</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <div class="middle-body">
+
+        <section>
+            <img src="{% static 'images/index-image.jpg'%}" width="100%">
+        </section>
+
+        <!--title section for introduction-->
+        <section class="intro-title">
+            <h2>Welcome to C.R.A.W.L.!</h2>
+        </section>
+
+        <!--Introduction Section-->
+        <section id="introduction" class="intro">
+
+            <div class="intro-detail">
+                <p>
+                    <strong><i>Configured Real-Time Automated Web Lurker.</i></strong>
+                    The purpose of this web application is to help Sac State users find information that's relevant to
+                    their
+                    needs on Reddit. This will help users who want to research more information from Reddit without
+                    having
+                    to go
+                    through millions of posts, which is what “C.R.A.W.L” can do best.
+                </p>
+            </div>
+        </section>
+
+        <!--title section for  crawl-->
+        <section class="crawl-title">
+            <h2>CRAWL</h2>
+        </section>
+
+        <!--CRAWL section-->
+        <section class="crawl">
+            <div class="item purpose1">
+                <p><strong>What is Crawl?</strong></p>
+                <ul>
+                    <li>A forum spider that navigates through all SubReddits to deliver student, faculty, parents, and
+                        others interested in the current events of California State University, Sacramento (CSUS), or any other Subreddits.</li>
+                    <li>Registered users are expected to be affiliated with the CSUS as either student, professor, or
+                        faculty member.</li>
+                    <li>Registered users can save their searches so that they won't forget on what they've searched for
+                        previously.</li>
+                </ul>
+            </div>
+            <div class="item purpose2">
+                <p><strong>Why use crawl?</strong></p>
+                <ul>
+                    <li>Different levels of CRAWL depending on account type of user. (ie. regular vs administrator, and
+                        guest).</li>
+                    <li>Advanced search functions are provided to all users to simplify their searches or make their
+                        searches more precise.</li>
+                    <li>Examples of Advanced search functions: From and to dates, search topics, subject keywords to
+                        simplify the general searches.</li>
+                    <li>Registed users (Regular and Administrator users only) have save history to conveniently search
+                        for
+                        the same words and/or phrases again.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!--title section for implementation-->
+        <section class="imple-title">
+            <h2>IMPLEMETATION</h2>
+        </section>
+
+        <!--implementation section-->
+        <section id="implement" class="implementation">
+            <div class="imple-detail imple1">
+                <p>C.R.A.W.L is written in Django utilizing the PRAW library. </p>
+            </div>
+            <div class="imple-detail imple2">
+                <p>We collaborated closely with our clients to deliver the best product that meets expectations.</p>
+            </div>
+            <div class="imple-detail imple3">
+                <p>As a team, we use Sprint and Agile Development to manage tasks and meet deadline.</p>
+            </div>
+        </section>
+
+        <!--Demo title-->
+        <section class="demo-title">
+            <h2>TRY OUT OUR DEMO!</h2>
+        </section>
+
+        <!--demo-->
+        <section class="demo">
+            <div class="demo-detail">
+                <p>Try out our product and Register for more advanced features.</p>
+                <a href="{% url 'crawl_demo' %}"><button class="button" style="vertical-align:middle"><span>C.R.A.W.L </span></button></a>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

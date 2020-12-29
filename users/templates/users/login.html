@@ -1,0 +1,31 @@
+{% extends 'users/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div>
+    <h1 class="toggle-btn">Log In</h1>
+</div>
+<form id=" login" class="input-group" method="POST">
+    {%csrf_token %}
+    <input type="text" name="username" class="input-field" placeholder="Username">
+    <input type="password" name="password" class="input-field" placeholder="Password">
+
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} pass_error">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <div class=" policy">
+        <!-- <input type="checkbox" class="check-box" />
+        <label id='label'>Remember Password</label> -->
+    </div>
+
+    <button type="submit" class="submit-btn">Login</button>
+    <p class="text-muted"><a href="{% url 'register' %}">Don't have account?</a></p>
+    <p class="text-muted"><a href="{% url 'password_reset' %}">Forgot your password?</a></p>
+
+</form>
+{% endblock content %}

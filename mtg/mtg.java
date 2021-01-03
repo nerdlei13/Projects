@@ -1,23 +1,22 @@
-import java.io.BufferedReader;
 import java.util.HashMap;
 import java.util.Scanner;
 public class MTG{
     public static void main(String [] args){
-        Scanner console = new Scanner(system.in);
-        System.out.print("Enter a sequence: ");
-        String test = isValid(console);
-        System.out.println(test);
-
-        fillmap();
+     isValidInput();
+        
     }
 
-    public static String isValid(Scanner console){
-        
+    public static String isValidInput(){
+        Scanner console = new Scanner(system.in);
+        System.out.print("Enter a sequence: ");
+        console.nextLine();
+
         String valid = console.nextLine();
-        while(valid.length() !=0)
+        while(valid.hasNextLine())
         {
          System.out.print("Enter a valid string: ");
-         while(valid.length() <= 5)
+         valid.nextLine();
+         while(valid.length() >= 1 || valid.length() < 5)
          {
             console.nextLine();
             System.out.print("Enter a valid string: ");
@@ -26,38 +25,21 @@ public class MTG{
       }
         return valid;
     }
-    /*public static char isAnagram(String valid){
+    /*public static String isAnagram(String valid){
 
     }*/
 
-    private static void fillMap(){
-        //file path for buffer reader
-        String filePath = "keys.txt";
-        //hashmap to fill
-        HashMap<String, String> map = new HashMap<>();
-        File file = new File(filePath);
-        //creates a BufferedReader object to read the file
-        try{
-            buff = new BufferedReader(new FileReader(file));
-            String line = null;
-
-            while((line = buff.readLine()) != null){
-                String[] parts = line.split(":");
-                String key = parts[0].trim();
-                String value = parts[1].trim();
-                if(!key.equals("") && !value.equals("")){
-                    map.put(key,value);
-                }
-
-            }
-
-        }catch(Exception e){
-            e.printStackTrace();
-        }finally{
-            if(buff != null){
-                buff.close();  
-        }
-        
+    public static void fillMap(){
+        HashMap<String, String> map = new HashMap<String, String>();
+        File file = new File("keys.txt");
+        Scanner input = new Scanner(file);
+        int colon = input.indexOf(":");
+        while(input.hasNextLine()){
+            String token = input.nextLine();
+            String key = token.substring(0, colon);
+            String value = token.substring(colon);
+            map.put(key,value);
+        } 
     }
 }
-}
+
